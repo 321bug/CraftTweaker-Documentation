@@ -2,24 +2,22 @@
 
 ## 问题
 
-Let's say we want to remove the recipes of some specific colors of wool.  
-White wool has the metadata 0, all colors range from meta 1 to meta 15, so there are 16 in total.
+假设我们要删除某些特定颜色的羊毛的配方。
+白羊毛的meta值为0，所有颜色的范围从meta值为1到meta值为15，因此共有16种。
+我们要删除meta值为3到12之间的羊毛。我们该怎么做？
+我们不能只删除所有的颜色的羊毛（例：使用`<minecraft：wool：*>`），但是我们也不想写相同的代码十次。
+虽然在此示例中这将完全起作用，但是在大规模情况下（例如有100种颜色羊毛），这将变得非常繁琐！ 
 
-We want to remove the wools with meta 3 to 12. What do we do?  
-We can't just remove all of them (in other words, use `<minecraft:wool:*>`), but we also don't want to write 10 times the same thing.  
-While in this example this would totally work, in large scale this becomes pretty annoying!
+## 我们应该/需要知道什么
 
-## What do we know/need to know
-
-- recipes.remove requires an [IIngredient](/Vanilla/Variable_Types/IIngredient/) Object
-- An [IItemStack](/Vanilla/Items/IItemStack/) can be used as [IIngredient](/Vanilla/Variable_Types/IIngredient/) as [IItemstack](/Vanilla/Items/IItemStack/) extends [IIngredient](/Vanilla/Variable_Types/IIngredient/)
-- We can use [IItemDefinitions](/Vanilla/Items/IItemDefinition/) to create [IItemStacks](/Vanilla/Items/IItemStack/)
+- recipes.remove 需要一个 [IIngredient](/Vanilla/Variable_Types/IIngredient/) 对象
+- 对象[IItemStack](/Vanilla/Items/IItemStack/)作为对象[IIngredient](/Vanilla/Variable_Types/IIngredient/)的延伸可以用做[IIngredient](/Vanilla/Variable_Types/IIngredient/)对象的 [IItemstack](/Vanilla/Items/IItemStack/)对象 
+- 可以用[IItemDefinitions](/Vanilla/Items/IItemDefinition/)对象去得到[IItemStacks](/Vanilla/Items/IItemStack/)对象
 
 ## 解决方法
 
-We use [IItemDefinitions](/Vanilla/Items/IItemDefinition/) and an Integer Range and iterate through latter.  
-If we can't use an int range we can also use a number array, but that would require you to type in all required numbers.  
-You can also use this to Except some items from being used.
+我们使用[IItemDefinitions](/Vanilla/Items/IItemDefinition/)和一个整数范围(int)并遍历后者。
+如果我们不能使用整数范围，我们也可以使用数字数组，但这将要求您输入所有必需的数字。
 
 ```zenscript
 val itemDef = <minecraft:wool>.definition;
